@@ -1,49 +1,44 @@
 package com.pets;
 
-import java.time.LocalDate;
+import com.pets.states.*;
 
 public class Main {
     public static void main(String[] args) {
-
+        // Criando usuários
         UsuarioFactory usuarioFactory = new UsuarioFactory();
+        Cliente cliente = (Cliente) usuarioFactory.criarCliente("João", "001", "joao@example.com", "12345678900", "Rua A", "123456789");
+        Funcionario funcionario = new Funcionario("Maria", "98765432100");
+        PrestadorDeServicos prestador = (PrestadorDeServicos) usuarioFactory.criarPrestador("Pedro", "002", "pedro@example.com");
 
-        Usuario cliente = usuarioFactory.criarCliente("test", 1, "teste@email", "123456", "endereco" , 3067170);
+        // Criando um produto
+        Produto produto = new Produto(1, 99.99);
+
+        // Criando uma compra e adicionando um produto
+        Compra compra = cliente.criarCompra();
+        compra.adicionarProduto(produto);
+        System.out.println("Valor Total da Compra: R$" + compra.getValorTotal());
+
+        // Criando um agendamento
+        Agendamento agendamento = cliente.criarAgendamento("2024-08-15", funcionario);
+
+        // Mudando o estado do agendamento
+        Situacao estado = DataProxima.getInstance();
+        agendamento.setSituacao(estado);
+
+        // Notificando o cliente
 
 
+        // Criando estabelecimentos e adicionando funcionários
+        EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
+        Clinica clinica = estabelecimentoFactory.criarClinica("12345678000195");
+        clinica.adicionarFuncionario(funcionario);
 
-        // Criar um agendamento
+        Loja loja = estabelecimentoFactory.criarLoja("98765432000167");
+        loja.adicionarProdutoEmEstoque(produto);
 
-        LocalDate date = LocalDate.of(2024, 7, 14);
-        Agendamento agendamento = new Agendamento(date, 1);
-
-        Funcionario funcionario = new Funcionario("Joao2", "1234123124");
-
-        agendamento.adicionarFuncionarioParaServico(funcionario);
-
-        cliente.criarAgendamento();
-        
-        // Criar uma compra
-        Compra compra = new Compra(1);
-
-        // Adicionar produtos à compra
-        Produto produto1 = new Produto(1, 10);
-
-        Produto produto2 = new Produto(2, 5);
-
-        compra.adicionarProduto(produto1);
-        compra.adicionarProduto(produto2);
-
-        // Calcular o valor total da compra
-        float valorTotal = compra.getValorTotal();
-        System.out.println("Valor total da compra: " + valorTotal);
-
-        // Realizar o pagamento
-        //boolean pagamentoRealizado = compra.realizarPagamento();
-        boolean pagamentoRealizado = true;
-        if (pagamentoRealizado) {
-            System.out.println("Pagamento realizado com sucesso!");
-        } else {
-            System.out.println("Falha ao realizar o pagamento.");
-        }
+        // Teste adicional de métodos
+        prestador.gerarRelatorio();
+        System.out.println("Estabelecimento Criado: " + clinica.getCnpj());
+        System.out.println("Estoque da Loja: " + loja.getEstoque().size() + " produto(s)");
     }
 }

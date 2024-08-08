@@ -1,14 +1,16 @@
 package com.pets;
 
-public class PrestadorDeServicos implements Usuario {
-    private String nome;
-    private int codigo;
-    private String email;
+import java.util.ArrayList;
+import java.util.List;
 
-    public PrestadorDeServicos(String nome, int codigo, String email) {
-        this.nome = nome;
-        this.codigo = codigo;
-        this.email = email;
+public class PrestadorDeServicos extends Usuario {
+    private List<Clinica> clinicas;
+    private List<Loja> lojas; 
+
+    public PrestadorDeServicos(String nome, String codigo, String email) {
+        super(nome, codigo, email);
+        this.clinicas = new ArrayList<Clinica>();
+        this.lojas = new ArrayList<Loja>();
     }
 
 
@@ -28,7 +30,4 @@ public class PrestadorDeServicos implements Usuario {
         
     }
 
-    public void criarAgendamento(){
-        
-    }
 }

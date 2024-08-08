@@ -1,17 +1,42 @@
 package com.pets;
 
-import java.time.LocalDate;
+import com.pets.states.*;
 
-public class Agendamento {
-    private LocalDate data;
-    private int tipo;
+public class Agendamento extends AgendamentoSubject{
+    private String data;
+    private Situacao situacaoAgendamento;
 
-    public Agendamento(LocalDate data, int tipo) {
+    private Cliente cliente;
+    private Funcionario funcionario;
+
+    public Agendamento(String data, Cliente cliente, Funcionario funcionario){
         this.data = data;
-        this.tipo = tipo;
+        this.cliente = cliente;
+        this.funcionario = funcionario;
+        addObserver(cliente);
     }
 
-    public void adicionarFuncionarioParaServico(Funcionario funcionario) {
-        // implementação para adicionar funcionário ao serviço
+
+    public void setSituacao(Situacao novaSituacao) {
+        if (situacaoAgendamento != novaSituacao) {
+            this.situacaoAgendamento = novaSituacao;
+            notifyObservers();
+        }
+        // else nao precisa notificar
     }
+
+
+    public String getData(){
+        return this.data;
+    }
+
+    public Cliente getCliente(){
+        return this.cliente;
+    }
+
+    public Funcionario getFuncionario(){
+        return this.funcionario;
+    }
+
+
 }

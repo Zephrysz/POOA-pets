@@ -2,48 +2,59 @@ package com.pets;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-class Cliente implements Usuario {
-    private String nome;
-    private int codigo;
-    private String email;
+
+class Cliente extends Usuario implements ClienteObserver{
     private String cpf;
     private String endereco;
-    private int contato;
+    private String contato;
     private List<Animal> pets;
-    // Implementação dos métodos da interface
 
-    public Cliente(String nome, int codigo, String email, String cpf, String endereco, int contato) {
-        this.nome = nome;
-        this.codigo = codigo;
-        this.email = email;
+    public Cliente(String nome, String codigo, String email, String cpf, String endereco, String contato) {
+        super(nome, codigo, email);
         this.cpf = cpf;
         this.endereco = endereco;
         this.contato = contato;
         this.pets = new ArrayList<Animal>();
     }
 
+    public void adicionarPet(Animal pet) {
+        this.pets.add(pet);
+    }
+
     public void removerPet(Animal pet) {
         this.pets.remove(pet);
-        System.out.println("Pet removido: " + pet);
     }
 
-    public void criarCompra() {
-        // implementação para criar compra
+    public Compra criarCompra() {
+        Random gerador = new Random(); // tem que fazer com que todos os ids sejam unicos 
+
+        return new Compra(gerador.nextInt(10000));
     }
 
-    public void criarAgendamento() {
-        System.out.println("CRiando agendamento");
+    public Agendamento criarAgendamento(String data, Funcionario funcionario) {
+        return new Agendamento(data, this, funcionario);
     }
 
-    // Métodos adicionais, getters e setters
+    public void update(){
+        System.out.println("Cliente " + this.cpf + " foi notificado.");
+    }
+
+    public String getCpf(){
+        return this.cpf;
+    }
+
+    public String getEndereco(){
+        return this.endereco;
+    }
+
+    public String getContato(){
+        return this.contato;
+    }
 
     public List<Animal> getPets() {
-        return pets;
-    }
-
-    public void setPets(List<Animal> pets) {
-        this.pets = pets;
+        return this.pets;
     }
 
     public void login(){
@@ -54,7 +65,4 @@ class Cliente implements Usuario {
         
     }
 
-    public void update(){
-
-    }
 }

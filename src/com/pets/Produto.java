@@ -2,14 +2,14 @@ package com.pets;
 
 public class Produto {
     private int id;
-    private float preco;
+    private double preco;
 
-    public Produto(int id, float preco) {
+    public Produto(int id, double preco) {
         this.id = id;
         this.preco = preco;
     }
     
-    public float getPreco() {
+    public double getPreco() {
         return this.preco;
     }
 }

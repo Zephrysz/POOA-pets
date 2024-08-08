@@ -14,21 +14,11 @@ public class Funcionario {
         // implementação do serviço
     }
 
-    // Métodos getter (opcional)
     public String getNome() {
         return nome;
     }
 
     public String getCpf() {
         return cpf;
-    }
-
-    // Métodos setter (opcional)
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
     }
 }

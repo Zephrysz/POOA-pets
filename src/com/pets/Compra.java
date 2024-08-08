@@ -29,7 +29,10 @@ public class Compra {
     }
 
     public boolean realizarPagamento() {
-        // implementação do pagamento
+        double total = getValorTotal();
+        // Lógica de pagamento
+        System.out.println("Pagamento de R$" + total + " realizado.");
         return true;
+        
     }
 }

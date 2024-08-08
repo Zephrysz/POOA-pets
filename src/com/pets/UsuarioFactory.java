@@ -1,11 +1,11 @@
 package com.pets;
 
 public class UsuarioFactory {
-    public Cliente criarCliente(String name, int codigo, String email, String cpf, String endereco, int contato){
-        return new Cliente(name, codigo, email, cpf, endereco, contato);
+    public Usuario criarCliente(String nome, String codigo, String email, String CPF, String endereco, String contato) {
+        return new Cliente(nome, codigo, email, CPF, endereco, contato);
     }
 
-    public PrestadorDeServicos criarPrestador(String nome, int codigo, String email){
-        return new PrestadorDeServicos( nome, codigo, email);
+    public Usuario criarPrestador(String nome, String codigo, String email) {
+        return new PrestadorDeServicos(nome, codigo, email);
     }
 }

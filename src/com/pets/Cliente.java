@@ -33,12 +33,12 @@ class Cliente extends Usuario implements ClienteObserver{
         return new Compra(gerador.nextInt(10000));
     }
 
-    public Agendamento criarAgendamento(String data, Funcionario funcionario) {
+    public Agendamento criarAgendamento(int data, Funcionario funcionario) {
         return new Agendamento(data, this, funcionario);
     }
 
     public void update(){
-        System.out.println("Cliente " + this.cpf + " foi notificado.");
+        System.out.println("Cliente de CPF: " + this.cpf + " foi notificado no email: " + this.email);
     }
 
     public String getCpf(){

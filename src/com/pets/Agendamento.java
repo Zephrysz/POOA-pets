@@ -3,19 +3,22 @@ package com.pets;
 import com.pets.states.*;
 
 public class Agendamento extends AgendamentoSubject{
-    private String data;
+    private int data; // data da consulta
     private Situacao situacaoAgendamento;
 
     private Cliente cliente;
     private Funcionario funcionario;
 
-    public Agendamento(String data, Cliente cliente, Funcionario funcionario){
+    public Agendamento(int data, Cliente cliente, Funcionario funcionario){
         this.data = data;
         this.cliente = cliente;
         this.funcionario = funcionario;
         addObserver(cliente);
     }
 
+    public void verificarSituacao(int dataAtual) {
+        this.situacaoAgendamento.verificarMudancaoSituacao(this, dataAtual);
+    }
 
     public void setSituacao(Situacao novaSituacao) {
         if (situacaoAgendamento != novaSituacao) {
@@ -26,7 +29,7 @@ public class Agendamento extends AgendamentoSubject{
     }
 
 
-    public String getData(){
+    public int getData(){
         return this.data;
     }
 

@@ -1,5 +1,6 @@
 package com.pets.states;
 
+import com.pets.*;
 
 public class Adiada implements Situacao {
     private static Adiada instance = new Adiada();
@@ -10,4 +11,7 @@ public class Adiada implements Situacao {
         return instance;
     }
 
+    public void verificarMudancaoSituacao(Agendamento agendamento, int dataAtual) {
+        System.out.println("A situacao eh adiada");
+    }
 }

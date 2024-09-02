@@ -21,10 +21,14 @@ public class Loja extends Estabelecimento{
         this.produtos.remove(produto);
     }
 
-    public void atualizarQuantidadeProduto(Produto produto, int quantidade){
-        if (produtos.contains(produto)){
-            
+    public void atualizarQuantidadeProduto(Produto produto, int quantidade) {
+        for (Produto p : produtos) {
+            if (p.getNome().equals(produto.getNome())) {
+                p.setQuantidade(quantidade);
+                return;
+            }
         }
+        throw new IllegalArgumentException("Produto não encontrado na loja.");
     }
 
     public List<Produto> getEstoque() {

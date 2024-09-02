@@ -18,6 +18,7 @@ class Cliente extends Usuario implements AbstractObserver{
         this.agendamentos = new ArrayList<Agendamento>();
     }
 
+
     public void adicionarPet(Animal pet) {
         this.pets.add(pet);
     }
@@ -27,9 +28,12 @@ class Cliente extends Usuario implements AbstractObserver{
     }
 
     public Compra criarCompra() {
-        Random gerador = new Random(); // tem que fazer com que todos os ids sejam unicos 
-
+        Random gerador = new Random(); // tem que fazer com que todos os ids sejam unicos (n eh o melhor jeito de fazer)
         return new Compra(gerador.nextInt(10000));
+    }
+    
+    public void adicionarProdutoNaCompra(Compra compra, Produto produto, int quantidade, Loja loja) {
+        compra.adicionarProduto(produto, quantidade, loja);
     }
 
     public void criarAgendamento(int data, Animal animal, Clinica clinica, SituacaoAgendamento situacao, List<Servico> servicos) {

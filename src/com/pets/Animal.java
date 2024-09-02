@@ -5,6 +5,12 @@ public class Animal {
     private String especie;
     private String raca;
 
+    public Animal(String nome, String especie, String raca) {
+        this.nome = nome;
+        this.especie = especie;
+        this.raca = raca;
+    }
+
     // Getters e Setters
     public String getNome(){
         return this.nome;

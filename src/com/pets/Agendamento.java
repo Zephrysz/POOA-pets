@@ -2,18 +2,14 @@ package com.pets;
 
 import com.pets.states.*;
 
-public class Agendamento extends AgendamentoSubject{
-    private int data; // data da consulta
-    private Situacao situacaoAgendamento;
+public class Agendamento extends Consulta{
 
-    private Cliente cliente;
-    private Funcionario funcionario;
+    private SituacaoAgendamento situacaoAgendamento;
+    private Atendimento atendimento;
 
-    public Agendamento(int data, Cliente cliente, Funcionario funcionario){
-        this.data = data;
-        this.cliente = cliente;
-        this.funcionario = funcionario;
-        addObserver(cliente);
+    public Agendamento(int data, Cliente cliente, Animal animal, Clinica clinica, SituacaoAgendamento situacao, List<Servico> servicos){
+        super(data, cliente, animal, clinica, servicos);
+        this.situacaoAgendamento = situacao;
     }
 
     public void verificarSituacao(int dataAtual) {
@@ -28,18 +24,15 @@ public class Agendamento extends AgendamentoSubject{
         // else nao precisa notificar
     }
 
-
-    public int getData(){
-        return this.data;
+    public void criarAtendimento() {
+        atendimento = new Atendimento(this);
     }
 
-    public Cliente getCliente(){
-        return this.cliente;
+    public void printar() {
+        System.out.println("Informacoes da Consulta: ");
+        System.out.println("Data eh: ", data);
+        System.out.println("Cliente eh: ", cliente.getNome());
+        System.out.println("Animal eh: ", animal.getNome());
+        System.out.println("Situacao eh: ", situacao.printar());
     }
-
-    public Funcionario getFuncionario(){
-        return this.funcionario;
-    }
-
-
 }

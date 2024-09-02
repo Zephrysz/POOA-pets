@@ -3,13 +3,15 @@ package com.pets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import Servico;
 
 
-class Cliente extends Usuario implements ClienteObserver{
-    private String cpf;
-    private String endereco;
-    private String contato;
+class Cliente extends Usuario implements AbstractObserver{
     private List<Animal> pets;
+    private List<Agendamento> agendamentos;
+    private string cpf;
+    private string endereco;
+    private string contato;
 
     public Cliente(String nome, String codigo, String email, String cpf, String endereco, String contato) {
         super(nome, codigo, email);
@@ -17,6 +19,7 @@ class Cliente extends Usuario implements ClienteObserver{
         this.endereco = endereco;
         this.contato = contato;
         this.pets = new ArrayList<Animal>();
+        this.agendamentos = new ArrayList<Agendamento>();
     }
 
     public void adicionarPet(Animal pet) {
@@ -33,8 +36,13 @@ class Cliente extends Usuario implements ClienteObserver{
         return new Compra(gerador.nextInt(10000));
     }
 
-    public Agendamento criarAgendamento(int data, Funcionario funcionario) {
-        return new Agendamento(data, this, funcionario);
+    public void criarAgendamento(int data, Animal animal, Clinica clinica, SituacaoAgendamento situacao, List<Servico> servicos) {
+        Agendamento agendamento = new Agendamento(data, this, animal, clinica, situacao, servicos);
+        agendamentos.add(agendamento);
+    }
+    
+    public void cancelarAgendamento(Agendamento agendamento){
+        agendamento.remove(agendamento);
     }
 
     public void update(){
@@ -57,12 +65,10 @@ class Cliente extends Usuario implements ClienteObserver{
         return this.pets;
     }
 
-    public void login(){
-        
-    }
 
-    public void cadastro(){
-        
+    public void mostrarAgendamentos() {
+        for (int i = 0; i < agendamentos.size(); i++) {
+            System.out.println(agendamentos[i].printar());
+        }
     }
-
 }

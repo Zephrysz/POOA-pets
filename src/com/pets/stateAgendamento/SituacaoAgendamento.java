@@ -2,6 +2,6 @@ package com.pets.states;
 
 import com.pets.*;
 
-public interface Situacao {
+public interface SituacaoAgendamento {
     void verificarMudancaoSituacao(Agendamento agendamento, int dataAtual);
 }

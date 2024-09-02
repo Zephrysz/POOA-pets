@@ -1,10 +1,258 @@
 package com.pets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import com.pets.states.*;
 
 public class Main {
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+        int opcaoInicial;
+
+        do {
+            // Exibe o menu de opções
+            System.out.println("Menu de Opções:");
+            System.out.println("0. Popular com exemplos");
+            System.out.println("1. Cadastrar Cliente");
+            System.out.println("2. Cadastrar Prestador de Servico");
+            System.out.println("3. Logar como Cliente");
+            System.out.println("4. Logar como Prestador de Servico");
+            System.out.println("5. Sair");
+            System.out.print("Escolha uma opção: ");
+
+            // Lê a opção escolhida pelo usuário
+            opcaoInicial = scanner.nextInt();
+
+            List<Cliente> clientesExistentes = new ArrayList<>();
+            List<PrestadorDeServicos> prestadoresExistentes = new ArrayList<>();
+
+            Cliente clienteLogadoAtualmente;
+            PrestadorDeServicos prestadorLogadoAtualmente;
+
+            UsuarioFactory usuarioFactory = new UsuarioFactory();
+            EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
+
+            // Executa a ação correspondente à opção escolhida
+            switch (opcaoInicial) {
+                case 0:
+                    System.out.println("Populando o sistema com exemplos");
+                    Cliente cliente1 = (Cliente) usuarioFactory.criarCliente("João", "001", "joao@mail.com", "111111", "Rua A", "(15)1111-1111");
+                    Animal animal1 = new Animal("Doguinho", "Cachorro", "Labrador");
+                    cliente1.adicionarPet(animal1);
+                    clientesExistentes.add(cliente1);
+
+                    Cliente cliente2 = (Cliente) usuarioFactory.criarCliente("Rafael", "002", "rafael@mail.com", "222222", "Rua B", "(15)2222-2222");
+                    Animal animal2 = new Animal("Loro", "Passaro", "Papagaio");
+                    cliente1.adicionarPet(animal2);
+                    clientesExistentes.add(cliente2);
+
+                    Cliente cliente3 = (Cliente) usuarioFactory.criarCliente("Jubileu", "003", "jubileu@mail.com", "333333", "Rua C", "(15)3333-3333");
+                    Animal animal3 = new Animal("Miado", "Gato", "Siames");
+                    cliente1.adicionarPet(animal3);
+                    clientesExistentes.add(cliente3);
+                    
+
+                    PrestadorDeServicos prestador1 = (PrestadorDeServicos) usuarioFactory.criarPrestador("Jonas", "004", "jonas@mail.com");
+                    Clinica clinica1 = estabelecimentoFactory.criarClinica("Clinica Pets Saudaveis");
+                    prestador1.addEstabelecimento(clinica1);
+                    prestadoresExistentes.add(prestador1);
+
+                    PrestadorDeServicos prestador2 = (PrestadorDeServicos) usuarioFactory.criarPrestador("Natan", "005", "natan@mail.com");
+                    Loja loja1 = estabelecimentoFactory.criarLoja("Loja Pets Gulosos");
+                    Produto produto1 = new Produto(15.50, 10, "Racao de Gato");
+                    loja1.adicionarProdutoEmEstoque(produto1);
+                    Produto produto2 = new Produto(17.99, 20, "Coleira");
+                    loja1.adicionarProdutoEmEstoque(produto2);
+                    Produto produto3 = new Produto(200.00, 5, "Gaiola");
+                    loja1.adicionarProdutoEmEstoque(produto3);
+                    prestador2.addEstabelecimento(loja1);
+                    prestadoresExistentes.add(prestador2);
+
+                    break;
+
+                case 1:
+                    System.out.println("Cadastrando um Cliente:");
+                    System.out.print("Digite seu nome: ");
+                    String nome = scanner.nextLine();
+
+                    System.out.print("Digite seu codigo: ");
+                    String codigo = scanner.nextLine();
+
+                    System.out.print("Digite seu email: ");
+                    String email = scanner.nextLine();
+
+                    System.out.print("Digite seu CPF: ");
+                    String cpf = scanner.nextLine();
+
+                    System.out.print("Digite seu endereço: ");
+                    String endereco = scanner.nextLine();
+
+                    System.out.print("Digite seu contato: ");
+                    String contato = scanner.nextLine();
+
+                    Cliente clienteCriado = (Cliente) usuarioFactory.criarCliente(nome, codigo, email, cpf, endereco, contato);
+                    clientesExistentes.add(clienteCriado);
+                    break;
+
+                case 2:
+                    System.out.println("Cadastrando um Prestador de Servico");
+                    // Entrada dos dados necessarios para cadastrar prestador
+                    // Criacao do prestador
+                    PrestadorDeServicos prestador = (PrestadorDeServicos) usuarioFactory.criarPrestador("Pedro", "002", "pedro@example.com");
+                    // Adicionar o prestador no vetor de prestadoresExistentes
+                    break;
+
+                case 3:
+                    System.out.println("Clientes existentes: ");
+                    for (int i = 0; i < clientesExistentes.size(); i++) {
+                        System.out.println(i + ". " + clientesExistentes[i].getNome());
+                    }
+
+                    System.out.print("Digite o numero do Cliente com o nome que voce quer logar: ");
+                    int clienteLogar = scanner.nextInt();
+
+                    clienteLogadoAtualmente = clientesExistentes[i];
+
+                    int opcaoCliente;
+                    do {
+                        // Opcoes do Cliente
+                        System.out.println("1. Cadastrar Animal");
+                        System.out.println("2. Criar Agendamento");
+                        System.out.println("3. Cancelar Agendamento");
+                        System.out.println("4. Listar Agendamentos");
+                        System.out.println("5. Realizar uma compra");
+                        System.out.println("6. Sair");
+
+                        opcaoCliente = scanner.nextInt();
+
+                        switch (opcaoCliente) {
+                            case 1:
+                                System.out.println("Cadastrando um animal");
+                                System.out.print("Digite o nome do seu animal: ");
+                                String nomeAnimal = scanner.nextLine();
+
+                                System.out.print("Digite a especie do seu animal: ");
+                                String especie = scanner.nextLine();
+
+                                System.out.print("Digite a raca do seu animal: ");
+                                String raca = scanner.nextLine();
+
+                                Animal animalCriado = new Animal(nomeAnimal, especie, raca);
+                                clienteLogadoAtualmente.adicionarPet(animalCriado);
+                                break;
+                            case 2:
+                                System.out.println("Criando um agendamento");
+                                // entrada dos dados
+                                // criacao com os dados corretos
+                                clienteLogadoAtualmente.criarAgendamento(...);
+                                break;
+                            case 3:
+                                System.out.println("Cancelando um agendamento");
+                                clienteLogadoAtualmente.mostrarAgendamentos();
+                                System.out.print("Digite a posicao do agendamento que voce deseja remover: ");
+                                int posicaoRemover = scanner.nextInt();
+                                clienteLogadoAtualmente.cancelarAgendamento(clienteLogadoAtualmente.getConsulta(posicaoRemover));
+
+                                break;
+                            case 4:
+                                System.out.println("Listando agendamentos");
+                                clienteLogadoAtualmente.mostrarAgendamentos();
+                                break;
+                                
+                            case 5:
+                                System.out.println("Realizando compras");
+                                // Mostrar todas as lojas
+                                // Entrada da loja selecionada
+                                // Mostrando os produtos selecionados
+                                // Montando o carrinho selecionando os produtos
+                                // Executando a compra (so dar um print)
+                                break;
+
+
+                            default:
+                                System.out.println("Opção inválida! Tente novamente.");
+                        }
+
+                    } while (opcao != 6);
+
+                    break;
+                case 4:
+                    System.out.println("Digite o nome do Prestrador que voce quer logar");
+                    // Mostrar os prestadores
+                    // Entrada do numero do prestador selecionado
+                    // Atualizar o clienteLogadoAtualmente
+
+                    int opcaoPrestador;
+                    do {
+                        
+                        // Opcoes do Prestador de Servico
+                        System.out.println("1. Cadastrar uma Loja");
+                        System.out.println("2. Cadastrar uma Clinica");
+                        System.out.println("3. Adicionar Produtos estoque");
+                        System.out.println("4. Listar Agendamentos");
+                        System.out.println("5. Cancelar Agendamento");
+                        System.out.println("6. Adiar Agendamento");
+                        
+                        opcaoPrestador = scanner.nextInt();
+
+                        switch (opcaoPrestador) {
+                            case 1:
+                                System.out.println("Cadastrando uma Loja:");
+                                System.out.print("Digite o nome: ");
+                                String nomeL = scanner.nextLine();
+
+                                System.out.print("Digite o CNPJ: ");
+                                String CNPJ = scanner.nextLine();
+
+                                Loja loja = estabelecimentoFactory.criarLoja(nomeLoja, CNPJ);
+
+                                break;
+                            case 2:
+                                System.out.println("Cadastrando uma Loja:");
+                                System.out.print("Digite o nome: ");
+                                String nomeClinica = scanner.nextLine();
+
+                                System.out.print("Digite o CNPJ: ");
+                                String CNPJ2 = scanner.nextLine();
+
+                                Clinica clinica = estabelecimentoFactory.criarClinica(nomeLoja, CNPJ2);
+                                
+                                break;
+                            case 3:
+                                System.out.println("Adicionando produto na Loja:");
+                                System.out.print("Digite o id: ");
+
+
+                                Produto produto = new Produto(nomeLoja, preco, quatidade);
+                                break;
+                            case 4:
+                                
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break;
+
+                            default:
+                                System.out.println("Opção inválida! Tente novamente.");
+                        }
+
+                    } while (opcao != 7);
+
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+            }
+
+        } while (opcao != 5);
+
+        scanner.close();
+    }
+
+        /*
         // Criando Usuários
         System.out.println("=== Criando Usuarios (e um funcionario) ===");
         UsuarioFactory usuarioFactory = new UsuarioFactory();
@@ -65,5 +313,5 @@ public class Main {
         System.out.println("Estabelecimento Criado: " + clinica.getCnpj());
         System.out.println("Estoque da Loja: " + loja.getEstoque().size() + " produto(s)");
         System.out.println("=========================\n");
-    }
+    }*/
 }

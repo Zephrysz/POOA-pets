@@ -2,7 +2,7 @@ package com.pets.states;
 
 import com.pets.*;
 
-public class Concluido implements Situacao {
+public class Concluido implements SituacaoAtendimento {
     private static Concluido instance = new Concluido();
 
     private Concluido() {}
@@ -11,7 +11,7 @@ public class Concluido implements Situacao {
         return instance;
     }
 
-    public void verificarMudancaoSituacao(Agendamento agendamento, int dataAtual) {
-        System.out.println("A situacao eh concluido");
+    public void verificarMudancaoSituacao(Atendimento atendimento, int dataAtual) {
+        System.out.println("Atendimento concluido");
     }
 }

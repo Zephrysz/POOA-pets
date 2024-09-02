@@ -2,7 +2,7 @@ package com.pets.states;
 
 import com.pets.*;
 
-public class DataLonge implements Situacao {
+public class DataLonge implements SituacaoAgendamento {
     private static DataLonge instance = new DataLonge();
 
     private DataLonge() {}

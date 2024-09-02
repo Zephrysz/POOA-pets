@@ -5,26 +5,18 @@ import java.util.List;
 
 public abstract class Estabelecimento {
     private String cnpj;
-    private List<Funcionario> funcionarios;
+    private String nome;
 
-    public Estabelecimento(String cnpj){
+    public Estabelecimento(String cnpj, String nome){
         this.cnpj = cnpj;
-        this.funcionarios = new ArrayList<Funcionario>();
-    }
-
-
-    public void adicionarFuncionario(Funcionario funcionario){
-        this.funcionarios.add(funcionario);
-    }
-    public void removerFuncionario(Funcionario funcionario){
-        this.funcionarios.remove(funcionario);
+        this.nome = nome;
     }
 
     public String getCnpj(){
         return this.cnpj;
     }
 
-    public List<Funcionario> getFuncionarios() {
-        return this.funcionarios;
+    public String getNome(){
+        return this.nome;
     }
 }

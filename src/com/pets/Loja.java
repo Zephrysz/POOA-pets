@@ -4,21 +4,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Loja extends Estabelecimento{
-    private List<Produto> estoque;
+    private List<Produto> produtos;
 
     // Construtor
-    public Loja(String cnpj) {
-        super(cnpj);
-        this.estoque = new ArrayList<Produto>();
+    public Loja(String nome, String cnpj) {
+        super(nome, cnpj);
+        this.produtos = new ArrayList<Produto>();
     }
 
 
-    public void adicionarProdutoEmEstoque(Produto produto) {
+    public void adicionarProduto(Produto produto) {
         this.estoque.add(produto);
     }
 
-    public void removerProdutoEmEstoque(Produto produto) {
+    public void removerProduto(Produto produto) {
         this.estoque.remove(produto);
+    }
+
+    public void atualizarQuantidadeProduto(Produto produto, int quantidade){
+        if (produtos.contains(produto)){
+            
+        }
     }
 
     public List<Produto> getEstoque() {

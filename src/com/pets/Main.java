@@ -237,11 +237,18 @@ public class Main {
                                 Produto produto = new Produto(precoProduto, quantidadeProduto, nomeProduto);
                                 break;
                             case 4:
-                                
+                                prestadorLogadoAtualmente.listarClinicas();
+                                System.out.print("Selecione a sua clinica que voce deseja ver as consultas: ");
+                                int posicaoClinica = scanner.nextLine();
+
+                                prestadorLogadoAtualmente.listarConsultasClinica(posicaoClinica);
                                 break;
                             case 5:
+                                System.out.println("Selecione o agendamento que voce deseja cancelar");
                                 break;
                             case 6:
+                                System.out.println("Selecione o agendamento que voce deseja adiar");
+
                                 break;
 
                             default:

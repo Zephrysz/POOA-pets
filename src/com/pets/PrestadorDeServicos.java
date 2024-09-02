@@ -15,6 +15,18 @@ public class PrestadorDeServicos extends Usuario {
         this.estabelecimentos.add(estabele);
     }
 
+    public void listarClinicas() {
+        for(int i = 0; i < estabelecimentos.size(); i++) {
+            if (estabelecimentos[i] instanceof Clinica) {
+                System.out.println(i + ". " + estabelecimentos[i].getNome());
+            }
+        }
+    }
+
+    public void listarConsultasClinica(int posicaoClinica) {
+        estabelecimentos[posicaoClinica].printarConsultasEstab();
+    }
+
     public void gerarRelatorio() {
         // implementação para gerar relatório
     }

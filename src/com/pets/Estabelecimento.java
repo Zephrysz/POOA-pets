@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Estabelecimento {
-    private String cnpj;
     private String nome;
+    private String cnpj;
 
-    public Estabelecimento(String cnpj, String nome){
-        this.cnpj = cnpj;
+    public Estabelecimento(String nome, String cnpj){
         this.nome = nome;
+        this.cnpj = cnpj;
     }
 
     public String getCnpj(){

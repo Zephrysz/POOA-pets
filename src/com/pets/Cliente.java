@@ -3,21 +3,17 @@ package com.pets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import Servico;
 
+import com.pets.servicos.*;
+import com.pets.stateAgendamento.*;
+import com.pets.stateAtendimento.*;
 
 class Cliente extends Usuario implements AbstractObserver{
     private List<Animal> pets;
     private List<Agendamento> agendamentos;
-    private string cpf;
-    private string endereco;
-    private string contato;
 
-    public Cliente(String nome, String codigo, String email, String cpf, String endereco, String contato) {
-        super(nome, codigo, email);
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.contato = contato;
+    public Cliente(String nome, String id, String email, String cpf, String endereco, String contato) {
+        super(nome, id, email, cpf, endereco, contato);
         this.pets = new ArrayList<Animal>();
         this.agendamentos = new ArrayList<Agendamento>();
     }
@@ -42,7 +38,11 @@ class Cliente extends Usuario implements AbstractObserver{
     }
     
     public void cancelarAgendamento(Agendamento agendamento){
-        agendamento.remove(agendamento);
+        agendamentos.remove(agendamento);
+    }
+
+    public Agendamento getAgendamentoPorIndex(int idx) {
+        return agendamentos.get(idx);
     }
 
     public void update(){
@@ -68,7 +68,7 @@ class Cliente extends Usuario implements AbstractObserver{
 
     public void mostrarAgendamentos() {
         for (int i = 0; i < agendamentos.size(); i++) {
-            System.out.println(agendamentos[i].printar());
+            agendamentos.get(i).printar();
         }
     }
 }

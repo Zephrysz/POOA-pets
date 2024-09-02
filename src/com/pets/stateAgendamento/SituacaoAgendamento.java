@@ -1,7 +1,7 @@
-package com.pets.states;
+package com.pets.stateAgendamento;
 
 import com.pets.*;
 
 public interface SituacaoAgendamento {
-    void verificarMudancaoSituacao(Agendamento agendamento, int dataAtual);
+    void verificarMudancaSituacao(Agendamento agendamento, int dataAtual);
 }

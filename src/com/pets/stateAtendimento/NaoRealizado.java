@@ -1,4 +1,4 @@
-package com.pets.states;
+package com.pets.stateAtendimento;
 
 import com.pets.*;
 
@@ -11,7 +11,7 @@ public class NaoRealizado implements SituacaoAtendimento {
         return instance;
     }
 
-    public void verificarMudancaoSituacao(Atendimento atendimento, int dataAtual) {
+    public void verificarMudancaSituacao(Atendimento atendimento, int dataAtual) {
         System.out.println("A situacao eh cancelado");
     }
 }

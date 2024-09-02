@@ -11,7 +11,7 @@ public class Concluido implements SituacaoAtendimento {
         return instance;
     }
 
-    public void verificarMudancaoSituacao(Atendimento atendimento, int dataAtual) {
+    public void verificarMudancaSituacao(Atendimento atendimento, int dataAtual) {
         System.out.println("Atendimento concluido");
     }
 }

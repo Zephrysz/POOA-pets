@@ -14,11 +14,11 @@ public class Loja extends Estabelecimento{
 
 
     public void adicionarProduto(Produto produto) {
-        this.estoque.add(produto);
+        this.produtos.add(produto);
     }
 
     public void removerProduto(Produto produto) {
-        this.estoque.remove(produto);
+        this.produtos.remove(produto);
     }
 
     public void atualizarQuantidadeProduto(Produto produto, int quantidade){
@@ -28,6 +28,6 @@ public class Loja extends Estabelecimento{
     }
 
     public List<Produto> getEstoque() {
-        return this.estoque;
+        return this.produtos;
     }
 }

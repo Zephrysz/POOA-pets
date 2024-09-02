@@ -2,11 +2,14 @@ package com.pets;
 
 import java.util.List;
 import java.util.ArrayList;
-import Servico;
+
+import com.pets.servicos.*;
+import com.pets.stateAgendamento.*;
+import com.pets.stateAtendimento.*;
 
 public abstract class Consulta extends AbstractSubject{
     private int data; // data da consulta
-    private Situacao situacaoAgendamento;
+    private SituacaoAgendamento situacaoAgendamento;
     private Cliente cliente;
     private Animal animal;
     private Clinica clinica;
@@ -17,6 +20,7 @@ public abstract class Consulta extends AbstractSubject{
         this.cliente = cliente;
         this.animal = animal;
         this.clinica = clinica;
+        this.servicos = servicos;
         addObserver(cliente);
     }
 
@@ -28,6 +32,9 @@ public abstract class Consulta extends AbstractSubject{
         this.data = data;
     }
 
+    public List<Servico> getServicos(){
+        return this.servicos;
+    }
 
     public int getData(){
         return this.data;
@@ -43,6 +50,10 @@ public abstract class Consulta extends AbstractSubject{
 
     public Clinica getClinica(){
         return this.clinica;
+    }
+
+    public SituacaoAgendamento getSituacaoAgendamento() {
+        return this.situacaoAgendamento;
     }
 
 

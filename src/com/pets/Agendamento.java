@@ -1,6 +1,11 @@
 package com.pets;
 
-import com.pets.states.*;
+import com.pets.stateAgendamento.*;
+import com.pets.servicos.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Agendamento extends Consulta{
 
@@ -13,10 +18,10 @@ public class Agendamento extends Consulta{
     }
 
     public void verificarSituacao(int dataAtual) {
-        this.situacaoAgendamento.verificarMudancaoSituacao(this, dataAtual);
+        this.situacaoAgendamento.verificarMudancaSituacao(this, dataAtual);
     }
 
-    public void setSituacao(Situacao novaSituacao) {
+    public void setSituacao(SituacaoAgendamento novaSituacao) {
         if (situacaoAgendamento != novaSituacao) {
             this.situacaoAgendamento = novaSituacao;
             notifyObservers();
@@ -30,9 +35,9 @@ public class Agendamento extends Consulta{
 
     public void printar() {
         System.out.println("Informacoes da Consulta: ");
-        System.out.println("Data eh: ", data);
-        System.out.println("Cliente eh: ", cliente.getNome());
-        System.out.println("Animal eh: ", animal.getNome());
-        System.out.println("Situacao eh: ", situacao.printar());
+        System.out.println("Data eh: " + this.getData());
+        System.out.println("Cliente eh: " + this.getCliente().getNome());
+        System.out.println("Animal eh: " + this.getAnimal().getNome());
+        System.out.println("Situacao eh: " + this.getSituacaoAgendamento());
     }
 }

@@ -5,13 +5,9 @@ import java.util.List;
 
 public class PrestadorDeServicos extends Usuario {
     private List<Estabelecimento> estabelecimentos;
-    //private List<Clinica> clinicas;
-    //private List<Loja> lojas; 
 
-    public PrestadorDeServicos(String nome, String codigo, String email) {
-        super(nome, codigo, email);
-        //this.clinicas = new ArrayList<Clinica>();
-        //this.lojas = new ArrayList<Loja>();
+    public PrestadorDeServicos(String nome, String id, String email, String cpf, String endereco, String contato ) {
+        super(nome, id, email, cpf, endereco, contato);
         this.estabelecimentos = new ArrayList<Estabelecimento>();
     }
 

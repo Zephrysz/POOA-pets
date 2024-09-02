@@ -1,4 +1,4 @@
-package com.pets.states;
+package com.pets.stateAgendamento;
 
 import com.pets.*;
 
@@ -11,7 +11,7 @@ public class Cancelado implements SituacaoAgendamento {
         return instance;
     }
 
-    public void verificarMudancaoSituacao(Agendamento agendamento, int dataAtual) {
+    public void verificarMudancaSituacao(Agendamento agendamento, int dataAtual) {
         System.out.println("A situacao eh cancelado");
     }
 }

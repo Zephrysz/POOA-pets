@@ -11,11 +11,12 @@ cd POOA-pets
 ```
 3) Compilar o programa:
 ```
-javac -sourcepath src src/com/pets/*.java
+javac -sourcepath src -d bin src/com/pets/*.java
+
 ```
 4) Executar o programa:
 ```
-java -cp src com.pets.Main
+java -cp bin com.pets.Main
 ```
 
 ## TODO:

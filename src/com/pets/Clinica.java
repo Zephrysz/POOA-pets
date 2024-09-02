@@ -3,6 +3,8 @@ package com.pets;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.pets.stateAgendamento.*;
+
 public class Clinica extends Estabelecimento{
     private List<Consulta> consultas;
 

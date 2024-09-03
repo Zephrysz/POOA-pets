@@ -451,10 +451,35 @@ public class Main {
 
                                 break;
                             case 5:
-                                System.out.println("Selecione o agendamento que voce deseja cancelar");
+                                prestadorLogadoAtualmente.listarClinicas();
+                                System.out.print("Selecione a sua clinica que voce deseja cancelar um agendamento: ");
+                                int posicaoClinicaCancelar = scanner.nextInt();
+
+                                prestadorLogadoAtualmente.listarConsultasClinica(posicaoClinicaCancelar);
+                                System.out.print("Selecione o agendamento que voce deseja cancelar: ");
+                                int posicaoAgendamentoCancelar = scanner.nextInt();
+
+                                // deleteConsulta
+                                Clinica clinicaCancelarConsulta = prestadorLogadoAtualmente.getClinicaPorIndex(posicaoClinicaCancelar);
+                                Consulta consultaCancelar = clinicaCancelarConsulta.getConsultaPorIndex(posicaoAgendamentoCancelar);
+                                clinicaCancelarConsulta.deleteConsulta(consultaCancelar);
                                 break;
                             case 6:
-                                System.out.println("Selecione o agendamento que voce deseja adiar");
+                                prestadorLogadoAtualmente.listarClinicas();
+                                System.out.print("Selecione a sua clinica que voce deseja adiar um agendamento: ");
+                                int posicaoClinicaAdiar = scanner.nextInt();
+
+                                prestadorLogadoAtualmente.listarConsultasClinica(posicaoClinicaAdiar);
+                                System.out.print("Selecione o agendamento que voce deseja adiar: ");
+                                int posicaoAgendamentoAdiar = scanner.nextInt();
+
+                                // updateConsulta
+                                System.out.print("Adiamento - Digite o novo dia para remarcar essa consulta: ");
+                                int novoDiaAdiar = scanner.nextInt();
+                                Clinica clinicaAdiarConsulta = prestadorLogadoAtualmente.getClinicaPorIndex(posicaoClinicaAdiar);
+                                Consulta consultaAdiar = clinicaAdiarConsulta.getConsultaPorIndex(posicaoAgendamentoAdiar);
+                                clinicaAdiarConsulta.updateConsulta(consultaAdiar, novoDiaAdiar);
+
                                 break;
                             case 7:
                                 System.out.println("Listando suas clinicas: ");

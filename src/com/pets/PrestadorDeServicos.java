@@ -52,6 +52,21 @@ public class PrestadorDeServicos extends Usuario {
         }
     }
 
+    public Clinica getClinicaPorIndex(int idx) {
+        Estabelecimento estabelecimento = estabelecimentos.get(idx);
+        Clinica clinica = (Clinica) estabelecimento;
+        return clinica;
+        //if (estabelecimento instanceof Clinica) {
+        //}
+
+    }
+
+    public Loja getLojaPorIndex(int idx) {
+        Estabelecimento estabelecimento = estabelecimentos.get(idx);
+        Loja loja = (Loja) estabelecimento;
+        return loja;
+    }
+
     public void gerarRelatorio() {
         // implementação para gerar relatório
     }

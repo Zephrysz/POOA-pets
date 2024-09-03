@@ -413,6 +413,8 @@ public class Main {
                                 String CNPJ = scanner.nextLine();
 
                                 Loja loja = estabelecimentoFactory.criarLoja(nomeLoja, CNPJ);
+                                prestadorLogadoAtualmente.addEstabelecimento(loja);
+                                lojasExistentes.add(loja);
 
                                 break;
                             case 2:
@@ -424,10 +426,20 @@ public class Main {
                                 String CNPJ2 = scanner.nextLine();
 
                                 Clinica clinica = estabelecimentoFactory.criarClinica(nomeClinica, CNPJ2);
-                                
+                                prestadorLogadoAtualmente.addEstabelecimento(clinica);
+                                clinicasExistentes.add(clinica);
                                 break;
                             case 3:
-                                System.out.println("Adicionando produto na Loja:");
+                                prestadorLogadoAtualmente.listarLojas();
+
+                                System.out.print("Digite o número da loja onde deseja adicionar o produto: ");
+                                int indiceLoja = scanner.nextInt();
+                                scanner.nextLine();
+                            
+                            
+                                Loja lojaSelecionada = prestadorLogadoAtualmente.getLojaPorIndex(indiceLoja);
+                            
+                                System.out.println("Adicionando produto na Loja: "+ lojaSelecionada.getNome());
                                 System.out.print("Digite o nome: ");
                                 String nomeProduto = scanner.nextLine();
 
@@ -439,8 +451,11 @@ public class Main {
                                 double precoProduto =  scanner.nextDouble();
                                 scanner.nextLine();
 
-
                                 Produto produto = new Produto(precoProduto, quantidadeProduto, nomeProduto);
+
+                                lojaSelecionada.adicionarProduto(produto);
+
+                                System.out.println("Produto adicionado com sucesso na loja: " + lojaSelecionada.getNome());
                                 break;
                             case 4:
                                 prestadorLogadoAtualmente.listarClinicas();

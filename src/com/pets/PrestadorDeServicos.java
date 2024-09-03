@@ -11,8 +11,8 @@ public class PrestadorDeServicos extends Usuario {
         this.estabelecimentos = new ArrayList<Estabelecimento>();
     }
 
-    public void addEstabelecimento(Estabelecimento estabele) {
-        this.estabelecimentos.add(estabele);
+    public void addEstabelecimento(Estabelecimento estabelecimento) {
+        this.estabelecimentos.add(estabelecimento);
     }
 
     public void listarLojas() {
@@ -66,6 +66,7 @@ public class PrestadorDeServicos extends Usuario {
         Loja loja = (Loja) estabelecimento;
         return loja;
     }
+
 
     public void gerarRelatorio() {
         // implementação para gerar relatório

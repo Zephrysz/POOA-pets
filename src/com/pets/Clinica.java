@@ -47,4 +47,5 @@ public class Clinica extends Estabelecimento{
     public Consulta getConsultaPorIndex(int idx) {
         return this.consultas.get(idx);
     }
+
 }

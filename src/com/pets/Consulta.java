@@ -8,7 +8,7 @@ import com.pets.stateAgendamento.*;
 import com.pets.stateAtendimento.*;
 
 public abstract class Consulta extends AbstractSubject{
-    private int data; // data da consulta
+    protected int data; // data da consulta
     private Cliente cliente;
     private Animal animal;
     private Clinica clinica;

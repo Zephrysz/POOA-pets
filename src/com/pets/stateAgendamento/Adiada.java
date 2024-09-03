@@ -13,6 +13,7 @@ public class Adiada implements SituacaoAgendamento {
 
     public void verificarMudancaSituacao(Agendamento agendamento, int dataAtual) {
         System.out.println("A situacao eh adiada");
+        agendamento.setSituacao(SituacaoPadrao.getInstance());
     }
 
     public String getSituacao(){

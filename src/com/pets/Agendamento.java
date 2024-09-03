@@ -53,4 +53,13 @@ public class Agendamento extends Consulta{
         System.out.println("Animal eh: " + this.getAnimal().getNome());
         System.out.println("Situacao eh: " + this.getSituacaoAgendamento());
     }
+
+    @Override
+    public void setData(int data){
+        if (data > this.data)
+        {
+            this.setSituacao(Adiada.getInstance()); // adiou
+        } // else apenas chegou mais perto (passou o dia)
+        this.data = data;
+    }
 }

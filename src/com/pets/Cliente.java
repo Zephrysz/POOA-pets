@@ -95,7 +95,7 @@ class Cliente extends Usuario implements AbstractObserver{
     }
   
     public void mostrarAtendimentos() {
-        for (int i = 0; i < this.agendamentos.size(); i++) {
+        for (int i = 0; i < this.atendimentos.size(); i++) {
             this.atendimentos.get(i).printar();
         }   
     }

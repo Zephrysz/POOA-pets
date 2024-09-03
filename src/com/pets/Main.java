@@ -17,6 +17,8 @@ public class Main {
         
         List<Cliente> clientesExistentes = new ArrayList<>();
         List<PrestadorDeServicos> prestadoresExistentes = new ArrayList<>();
+        List<Loja> lojasExistentes = new ArrayList<>();
+        List<Clinica> clinicasExistentes = new ArrayList<>();
 
         Cliente clienteLogadoAtualmente;
         PrestadorDeServicos prestadorLogadoAtualmente;
@@ -43,11 +45,13 @@ public class Main {
 
         PrestadorDeServicos prestador1 = usuarioFactory.criarPrestador("Jonas", "004", "jonas@mail.com", "cpf4", "endereco4", "contato4");
         Clinica clinica1 = estabelecimentoFactory.criarClinica("Clinica Pets Saudaveis", "123321");
+        clinicasExistentes.add(clinica1);
         prestador1.addEstabelecimento(clinica1);
         prestadoresExistentes.add(prestador1);
 
         PrestadorDeServicos prestador2 =  usuarioFactory.criarPrestador("Natan", "005", "natan@mail.com", "cpf5", "endereco5", "contato5");
         Loja loja1 = estabelecimentoFactory.criarLoja("Loja Pets Gulosos", "321123");
+        lojasExistentes.add(loja1);
         Produto produto1 = new Produto(15.50, 10, "Racao de Gato");
         loja1.adicionarProduto(produto1);
         Produto produto2 = new Produto(17.99, 20, "Coleira");
@@ -136,11 +140,13 @@ public class Main {
                         // Opcoes do Cliente
                         System.out.println("\n1. Cadastrar Animal");
                         System.out.println("2. Criar Agendamento");
-                        System.out.println("3. Cancelar Agendamento");
-                        System.out.println("4. Listar Agendamentos");
-                        System.out.println("5. Realizar uma compra");
-                        System.out.println("6. Listar Animais");
-                        System.out.println("7. Deslogar do cliente");
+                        System.out.println("3. Passar um dia");
+                        System.out.println("4. Cancelar Agendamento");
+                        System.out.println("5. Listar Agendamentos");
+                        System.out.println("6. Listar Atendimentos");
+                        System.out.println("7. Realizar uma compra");
+                        System.out.println("8. Listar Animais");
+                        System.out.println("9. Deslogar do cliente");
 
                         opcaoCliente = scanner.nextInt();
                         scanner.nextLine();
@@ -178,8 +184,16 @@ public class Main {
                                 }
                                 int petIndex = scanner.nextInt();
                                 scanner.nextLine(); 
-
                                 Animal petSelecionado = pets.get(petIndex);
+
+                                System.out.println("Selecione a clinica para realizar a consulta:");
+                                for (int i = 0; i < clinicasExistentes.size(); i++) {
+                                    System.out.println(i + " - " + clinicasExistentes.get(i).getNome());
+                                }
+                                int clinicaIndex = scanner.nextInt();
+                                scanner.nextLine();
+
+                                Clinica clinicaSelecionada = clinicasExistentes.get(clinicaIndex);
 
                                 // Selecionando os serviços (exemplo simples com um serviço, pode ser expandido para múltiplos)
                                 List<Servico> servicos = new ArrayList<>();
@@ -219,10 +233,21 @@ public class Main {
                                     break;
                                 }
 
-                                clienteLogadoAtualmente.criarAgendamento(data, petSelecionado, clinica1, servicos);                                
+                                clienteLogadoAtualmente.criarAgendamento(data, petSelecionado, clinicaSelecionada, servicos);                                
 
                                 break;
                             case 3:
+                                System.out.println("Passando o dia");
+                                for (Agendamento agendamento : clienteLogadoAtualmente.getAgendamentos()){
+                                    agendamento.setData(agendamento.getData() - 1);
+                                    agendamento.verificarSituacao();
+                                }
+                                for (Atendimento atendimento : clienteLogadoAtualmente.getAtendimentos()){
+                                    atendimento.setData(atendimento.getData() - 1);
+                                    atendimento.verificarSituacao();
+                                }
+                                break;
+                            case 4:
                                 System.out.println("Cancelando um agendamento");
                                 clienteLogadoAtualmente.mostrarAgendamentos();
                                 System.out.print("Digite a posicao do agendamento que voce deseja remover: ");
@@ -231,27 +256,79 @@ public class Main {
                                 clienteLogadoAtualmente.cancelarAgendamento(clienteLogadoAtualmente.getAgendamentoPorIndex(posicaoRemover));
 
                                 break;
-                            case 4:
+                            case 5:
                                 System.out.println("Listando agendamentos");
                                 clienteLogadoAtualmente.mostrarAgendamentos();
                                 break;
-                                
-                            case 5:
-                                System.out.println("Realizando compras");
-                                // Mostrar todas as lojas
-                                // Entrada da loja selecionada
-                                // Mostrando os produtos selecionados
-                                // Montando o carrinho selecionando os produtos
-                                // Executando a compra (so dar um print)
+                            case 6:
+                                System.out.println("Listando atendimentos");
+                                clienteLogadoAtualmente.mostrarAtendimentos();
                                 break;
-                            case 6: 
+                                
+                            case 7:
+                                System.out.println("Realizando compras");
+                                System.out.println("Escolha uma loja:");
+                                for (int i = 0; i < lojasExistentes.size(); i++) {
+                                    System.out.println(i + " - " + lojasExistentes.get(i).getNome());
+                                }
+                                                               
+
+                                int lojaIndex = scanner.nextInt();
+                                scanner.nextLine(); 
+
+                                Loja loja = lojasExistentes.get(lojaIndex);
+
+                                System.out.println("Produtos disponíveis na loja " + loja.getNome() + ":");
+                                List<Produto> produtos = loja.getProdutos();
+                                for (int i = 0; i < produtos.size(); i++) {
+                                    Produto produto = produtos.get(i);
+                                    System.out.println(i + " -  " + produto.getNome() + " - R$" + produto.getPreco() + " (Estoque: " + produto.getQuantidade() + ")");
+                                }
+
+                                // Escolher produtos e quantidades
+                                List<Produto> produtosSelecionados = new ArrayList<>();
+                                List<Integer> quantidades = new ArrayList<>();
+
+                                while (true) {
+                                    System.out.print("Digite o número do produto para adicionar ao carrinho (ou -1 para finalizar): ");
+                                    int produtoEscolhido = scanner.nextInt();
+                                    scanner.nextLine(); 
+
+                                    if (produtoEscolhido == -1) break;
+
+                                    Produto produtoSelecionado = produtos.get(produtoEscolhido);
+
+                                    System.out.print("Digite a quantidade: ");
+                                    int quantidade = scanner.nextInt();
+                                    scanner.nextLine(); 
+
+                                    if (quantidade <= 0 || quantidade > produtoSelecionado.getQuantidade()) {
+                                        System.out.println("Quantidade inválida.");
+                                        continue;
+                                    }
+
+                                    produtosSelecionados.add(produtoSelecionado);
+                                    quantidades.add(quantidade);
+                                }
+
+                                Compra compra = clienteLogadoAtualmente.criarCompra();
+                                for (int i = 0; i < produtosSelecionados.size(); i++) {
+                                    Produto produto = produtosSelecionados.get(i);
+                                    int quantidade = quantidades.get(i);
+                                    clienteLogadoAtualmente.adicionarProdutoNaCompra(compra, produto, quantidade, loja);
+                                }
+
+                                compra.realizarPagamento();
+                                System.out.println("Compra finalizada com sucesso!");
+                                break;
+                            case 8: 
                                 System.out.println("Seus pets: ");
                                 for (Animal pet : clienteLogadoAtualmente.getPets()) {
                                     pet.printar();
                                     System.out.println("\n");
                                 }
                                 break;
-                           case 7:
+                           case 9:
                                 System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
                                 break;
       
@@ -260,7 +337,7 @@ public class Main {
                                 System.out.println("Opção inválida! Tente novamente.");
                         }
 
-                    } while (opcaoCliente != 7);
+                    } while (opcaoCliente != 9);
 
                     break;
                 case 4:

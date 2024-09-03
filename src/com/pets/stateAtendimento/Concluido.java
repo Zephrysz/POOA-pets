@@ -1,4 +1,4 @@
-package com.pets.states;
+package com.pets.stateAtendimento;
 
 import com.pets.*;
 
@@ -13,5 +13,9 @@ public class Concluido implements SituacaoAtendimento {
 
     public void verificarMudancaSituacao(Atendimento atendimento, int dataAtual) {
         System.out.println("Atendimento concluido");
+    }
+
+    public String getSituacao(){
+        return "Concluido";
     }
 }

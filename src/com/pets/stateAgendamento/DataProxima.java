@@ -21,6 +21,7 @@ public class DataProxima implements SituacaoAgendamento {
             System.out.println("A consulta eh hoje, criando atendimento");
             // agendamento.setSituacao(DataAgora.getInstance()); // finge que agendamento foi deletado
             agendamento.criarAtendimento();
+            
         }
         else {
             System.out.println("A situacao continua Perto, pois ainda faltam: " + diasRestantes + " dia(s)");

@@ -11,11 +11,13 @@ import com.pets.stateAtendimento.*;
 class Cliente extends Usuario implements AbstractObserver{
     private List<Animal> pets;
     private List<Agendamento> agendamentos;
+    private List<Atendimento> atendimentos;
 
     public Cliente(String nome, String id, String email, String cpf, String endereco, String contato) {
         super(nome, id, email, cpf, endereco, contato);
         this.pets = new ArrayList<Animal>();
-        this.agendamentos = new ArrayList<Agendamento>();
+        this.agendamentos = new ArrayList<>();
+        this.atendimentos = new ArrayList<>();
     }
 
 
@@ -38,19 +40,23 @@ class Cliente extends Usuario implements AbstractObserver{
 
     public void criarAgendamento(int data, Animal animal, Clinica clinica, List<Servico> servicos) {
         Agendamento agendamento = new Agendamento(data, this, animal, clinica, servicos);
-        agendamentos.add(agendamento);
+        this.agendamentos.add(agendamento);
     }
     
     public void cancelarAgendamento(Agendamento agendamento){
-        agendamentos.remove(agendamento);
+        this.agendamentos.remove(agendamento);
     }
 
     public Agendamento getAgendamentoPorIndex(int idx) {
-        return agendamentos.get(idx);
+        return this.agendamentos.get(idx);
     }
 
     public void update(){
         System.out.println("Cliente de CPF: " + this.cpf + " foi notificado no email: " + this.email);
+    }
+
+    public void adicionarAtendimento(Atendimento atendimento){
+        this.atendimentos.add(atendimento);
     }
 
     public String getCpf(){
@@ -69,10 +75,23 @@ class Cliente extends Usuario implements AbstractObserver{
         return this.pets;
     }
 
+    public List<Agendamento> getAgendamentos() {
+        return this.agendamentos;
+    }
+
+    public List<Atendimento> getAtendimentos() {
+        return this.atendimentos;
+    }
 
     public void mostrarAgendamentos() {
-        for (int i = 0; i < agendamentos.size(); i++) {
-            agendamentos.get(i).printar();
+        for (int i = 0; i < this.agendamentos.size(); i++) {
+            this.agendamentos.get(i).printar();
         }
+    }
+
+    public void mostrarAtendimentos() {
+        for (int i = 0; i < this.agendamentos.size(); i++) {
+            this.atendimentos.get(i).printar();
+        }   
     }
 }

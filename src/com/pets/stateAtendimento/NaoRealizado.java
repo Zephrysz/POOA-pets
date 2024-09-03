@@ -14,4 +14,8 @@ public class NaoRealizado implements SituacaoAtendimento {
     public void verificarMudancaSituacao(Atendimento atendimento, int dataAtual) {
         System.out.println("A situacao eh cancelado");
     }
+
+    public String getSituacao(){
+        return "Nao realizado";
+    }
 }

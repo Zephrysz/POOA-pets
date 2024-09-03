@@ -394,7 +394,9 @@ public class Main {
                         System.out.println("4. Listar Agendamentos");
                         System.out.println("5. Cancelar Agendamento");
                         System.out.println("6. Adiar Agendamento");
-                        System.out.println("7. Deslogar do prestador\n");
+                        System.out.println("7. Listar Clinicas");
+                        System.out.println("8. Listar Lojas");
+                        System.out.println("9. Deslogar do prestador\n");
                         System.out.print("Escolha uma opção: ");
                         
                         opcaoPrestador = scanner.nextInt();
@@ -442,11 +444,11 @@ public class Main {
                                 break;
                             case 4:
                                 prestadorLogadoAtualmente.listarClinicas();
-                                System.out.print("Selecione a sua clinica que voce deseja ver as consultas: ");
+                                System.out.print("Selecione a sua clinica que voce deseja listar os agendamentos: ");
                                 int posicaoClinica = scanner.nextInt();
 
                                 prestadorLogadoAtualmente.listarConsultasClinica(posicaoClinica);
-                                System.out.println("Agora voce esta logado como: " + prestadorLogadoAtualmente.getNome());
+
                                 break;
                             case 5:
                                 System.out.println("Selecione o agendamento que voce deseja cancelar");
@@ -455,14 +457,23 @@ public class Main {
                                 System.out.println("Selecione o agendamento que voce deseja adiar");
                                 break;
                             case 7:
-                                System.out.println("Saindo da conta do prestador: " + prestadorLogadoAtualmente.getNome());
+                                System.out.println("Listando suas clinicas: ");
+                                prestadorLogadoAtualmente.listarClinicas();
                                 break;
 
+                            case 8:
+                                System.out.println("Listando suas lojas: ");
+                                prestadorLogadoAtualmente.listarLojas();
+                                break;
+
+                            case 9: 
+                                System.out.println("Saindo da conta do prestador: " + prestadorLogadoAtualmente.getNome());
+                                break;
                             default:
                                 System.out.println("Opção inválida! Tente novamente.");
                         }
 
-                    } while (opcaoPrestador != 7);
+                    } while (opcaoPrestador != 9);
 
                     break;
                 case 5:

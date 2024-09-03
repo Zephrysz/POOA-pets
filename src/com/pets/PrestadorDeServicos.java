@@ -15,11 +15,29 @@ public class PrestadorDeServicos extends Usuario {
         this.estabelecimentos.add(estabele);
     }
 
+    public void listarLojas() {
+        int qtdLoja = 0;
+        for(int i = 0; i < estabelecimentos.size(); i++) {
+            if (estabelecimentos.get(i) instanceof Loja) {
+                System.out.println(i + ". " + estabelecimentos.get(i).getNome());
+                qtdLoja++;
+            }
+        }
+        if(qtdLoja == 0) {
+            System.out.println("Voce nao tem lojas cadastradas");
+        }
+    }
+
     public void listarClinicas() {
+        int qtdClinicas = 0;
         for(int i = 0; i < estabelecimentos.size(); i++) {
             if (estabelecimentos.get(i) instanceof Clinica) {
                 System.out.println(i + ". " + estabelecimentos.get(i).getNome());
+                qtdClinicas++;
             }
+        }
+        if(qtdClinicas == 0) {
+            System.out.println("Voce nao tem clinicas cadastradas");
         }
     }
 
@@ -28,6 +46,9 @@ public class PrestadorDeServicos extends Usuario {
         if (estabelecimento instanceof Clinica) {
             Clinica clinica = (Clinica) estabelecimento;
             clinica.printarConsultasEstab();
+        }
+        else {
+            System.out.println("Essa posicao de clinica nao existe");
         }
     }
 

@@ -13,6 +13,9 @@ public class Clinica extends Estabelecimento{
         this.consultas = new ArrayList<Consulta>();
     }
 
+    public void adicionarAgendamento(Agendamento agendamento) {
+        this.consultas.add(agendamento);
+    }
 
     public void updateConsulta(Consulta consulta, int novaData) {
         if (consultas.contains(consulta)) {
@@ -34,7 +37,7 @@ public class Clinica extends Estabelecimento{
     }
 
     public void printarConsultasEstab() {
-        System.out.println("Consultas da clinica" + this.getNome());
+        System.out.println("\nConsultas da clinica: " + "\"" + this.getNome() + "\"" + ":\n");
         for(int i = 0; i < consultas.size(); i++) {
             consultas.get(i).printarConsulta();
         }

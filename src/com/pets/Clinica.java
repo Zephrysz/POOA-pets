@@ -34,9 +34,9 @@ public class Clinica extends Estabelecimento{
     }
 
     public void printarConsultasEstab() {
-        System.out.println("Consultas da clinica", this.getNome());
+        System.out.println("Consultas da clinica" + this.getNome());
         for(int i = 0; i < consultas.size(); i++) {
-            consultas[i].printarConsulta();
+            consultas.get(i).printarConsulta();
         }
     }
 }

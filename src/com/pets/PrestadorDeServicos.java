@@ -17,14 +17,18 @@ public class PrestadorDeServicos extends Usuario {
 
     public void listarClinicas() {
         for(int i = 0; i < estabelecimentos.size(); i++) {
-            if (estabelecimentos[i] instanceof Clinica) {
-                System.out.println(i + ". " + estabelecimentos[i].getNome());
+            if (estabelecimentos.get(i) instanceof Clinica) {
+                System.out.println(i + ". " + estabelecimentos.get(i).getNome());
             }
         }
     }
 
     public void listarConsultasClinica(int posicaoClinica) {
-        estabelecimentos[posicaoClinica].printarConsultasEstab();
+        Estabelecimento estabelecimento = estabelecimentos.get(posicaoClinica);
+        if (estabelecimento instanceof Clinica) {
+            Clinica clinica = (Clinica) estabelecimento;
+            clinica.printarConsultasEstab();
+        }
     }
 
     public void gerarRelatorio() {

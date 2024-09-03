@@ -57,15 +57,24 @@ public class Main {
         prestador2.addEstabelecimento(loja1);
         prestadoresExistentes.add(prestador2);
 
+        List<Cliente> clientesExistentes = new ArrayList<>();
+        List<PrestadorDeServicos> prestadoresExistentes = new ArrayList<>();
+
+        Cliente clienteLogadoAtualmente;
+        PrestadorDeServicos prestadorLogadoAtualmente;
+
+        UsuarioFactory usuarioFactory = new UsuarioFactory();
+        EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
+      
         do {
             // Exibe o menu de opções
-            System.out.println("Menu de Opções:");
+            System.out.println("\nMenu de Opções:");
             System.out.println("0. Popular com exemplos");
             System.out.println("1. Cadastrar Cliente");
             System.out.println("2. Cadastrar Prestador de Servico");
             System.out.println("3. Logar como Cliente");
             System.out.println("4. Logar como Prestador de Servico");
-            System.out.println("5. Sair");
+            System.out.println("5. Sair\n");
             System.out.print("Escolha uma opção: ");
 
             // Lê a opção escolhida pelo usuário
@@ -73,10 +82,12 @@ public class Main {
             scanner.nextLine();
 
 
+
             // Executa a ação correspondente à opção escolhida
             switch (opcaoInicial) {
                 case 0:
 
+                    System.out.println("Sistema populado com exemplos com sucesso!");
                     break;
 
                 case 1:
@@ -101,6 +112,7 @@ public class Main {
 
                     Cliente clienteCriado = usuarioFactory.criarCliente(nome, codigo, email, cpf, endereco, contato);
                     clientesExistentes.add(clienteCriado);
+
                     break;
 
                 case 2:
@@ -125,18 +137,21 @@ public class Main {
                     int clienteLogar = scanner.nextInt();
                     scanner.nextLine();
 
+
                     clienteLogadoAtualmente = clientesExistentes.get(clienteLogar);
+                    System.out.println("Agora voce esta logado como: " + clienteLogadoAtualmente.getNome());
 
                     int opcaoCliente;
                     do {
                         // Opcoes do Cliente
-                        System.out.println("1. Cadastrar Animal");
+                        System.out.println("\n1. Cadastrar Animal");
                         System.out.println("2. Criar Agendamento");
                         System.out.println("3. Cancelar Agendamento");
                         System.out.println("4. Listar Agendamentos");
                         System.out.println("5. Realizar uma compra");
-                        System.out.println("6. Listar Animais");
-                        System.out.println("7. Sair");
+                        System.out.println("6. Deslogar do cliente\n");
+                        System.out.println("7. Listar Animais");
+                        System.out.println("8. Sair");
 
                         opcaoCliente = scanner.nextInt();
                         scanner.nextLine();
@@ -240,30 +255,40 @@ public class Main {
                                 // Montando o carrinho selecionando os produtos
                                 // Executando a compra (so dar um print)
                                 break;
-                            
-                            case 6: 
+                           case 6:
+                                System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
+                                break;
+      
+                            case 7: 
                                 System.out.println("Seus pets: ");
                                 for (Animal pet : clienteLogadoAtualmente.getPets()) {
                                     pet.printar();
                                     System.out.println("\n");
                                 }
                                 break;
-                            case 7: 
+                            case 8: 
                                 System.out.println("saindo");
                                 break;
-
                             default:
                                 System.out.println("Opção inválida! Tente novamente.");
                         }
 
-                    } while (opcaoCliente != 7);
+                    } while (opcaoCliente != 8);
 
                     break;
                 case 4:
-                    System.out.println("Digite o nome do Prestrador que voce quer logar");
-                    // Mostrar os prestadores
-                    // Entrada do numero do prestador selecionado
-                    // Atualizar o clienteLogadoAtualmente
+                    System.out.println("Prestadores existentes: ");
+                    for (int i = 0; i < prestadoresExistentes.size(); i++) {
+                        System.out.println(i + ". " + prestadoresExistentes.get(i).getNome());
+                    }
+
+                    System.out.print("Digite o numero do prestado com o nome que voce quer logar: ");
+                    int prestadorLogar = scanner.nextInt();
+                    System.out.println("");
+
+                    prestadorLogadoAtualmente = prestadoresExistentes.get(prestadorLogar);
+                    System.out.println("Agora voce esta logado como: " + prestadorLogadoAtualmente.getNome());
+
 
                     int opcaoPrestador;
                     do {
@@ -275,9 +300,12 @@ public class Main {
                         System.out.println("4. Listar Agendamentos");
                         System.out.println("5. Cancelar Agendamento");
                         System.out.println("6. Adiar Agendamento");
+                        System.out.println("7. Deslogar do prestador\n");
+                        System.out.print("Escolha uma opção: ");
                         
                         opcaoPrestador = scanner.nextInt();
                         scanner.nextLine();
+
 
                         switch (opcaoPrestador) {
                             case 1:
@@ -319,11 +347,21 @@ public class Main {
                                 Produto produto = new Produto(precoProduto, quantidadeProduto, nomeProduto);
                                 break;
                             case 4:
-                                
+                                prestadorLogadoAtualmente.listarClinicas();
+                                System.out.print("Selecione a sua clinica que voce deseja ver as consultas: ");
+                                int posicaoClinica = scanner.nextInt();
+
+                                prestadorLogadoAtualmente.listarConsultasClinica(posicaoClinica);
+                                System.out.println("Agora voce esta logado como: " + prestadorLogadoAtualmente.getNome());
                                 break;
                             case 5:
+                                System.out.println("Selecione o agendamento que voce deseja cancelar");
                                 break;
                             case 6:
+                                System.out.println("Selecione o agendamento que voce deseja adiar");
+                                break;
+                            case 7:
+                                System.out.println("Saindo da conta do prestador: " + prestadorLogadoAtualmente.getNome());
                                 break;
 
                             default:
@@ -334,8 +372,9 @@ public class Main {
 
                     break;
                 case 5:
-                    System.out.println("saindo");
+                    System.out.println("Saindo do sistema com sucesso!");
                     break;
+
                 default:
                     System.out.println("Opção inválida! Tente novamente.");
             }

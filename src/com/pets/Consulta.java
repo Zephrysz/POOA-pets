@@ -56,5 +56,13 @@ public abstract class Consulta extends AbstractSubject{
         return this.situacaoAgendamento;
     }
 
+    public void printarConsulta() {
+        System.out.println("Consulta marcada para o dia: " + data);
+        System.out.println("Com o cliente: " + cliente.getNome());
+        System.out.println("Com o animal: " + animal.getNome());
+        System.out.println("Com os serviços: ...");
+        System.out.println("");
+    }
+
 
 }

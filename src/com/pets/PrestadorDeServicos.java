@@ -68,9 +68,4 @@ public class PrestadorDeServicos extends Usuario {
     }
 
 
-    public void gerarRelatorio() {
-        // implementação para gerar relatório
-    }
-
-
 }

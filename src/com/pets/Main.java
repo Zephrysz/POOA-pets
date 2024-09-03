@@ -56,16 +56,6 @@ public class Main {
         loja1.adicionarProduto(produto3);
         prestador2.addEstabelecimento(loja1);
         prestadoresExistentes.add(prestador2);
-
-        List<Cliente> clientesExistentes = new ArrayList<>();
-        List<PrestadorDeServicos> prestadoresExistentes = new ArrayList<>();
-
-        Cliente clienteLogadoAtualmente;
-        PrestadorDeServicos prestadorLogadoAtualmente;
-
-        UsuarioFactory usuarioFactory = new UsuarioFactory();
-        EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
-      
         do {
             // Exibe o menu de opções
             System.out.println("\nMenu de Opções:");

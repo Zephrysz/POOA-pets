@@ -12,7 +12,7 @@ public class Concluido implements SituacaoAtendimento {
     }
 
     public void verificarMudancaSituacao(Atendimento atendimento, int dataAtual) {
-        System.out.println("Atendimento concluido");
+        System.out.println("Atendimento ja foi concluido");
     }
 
     public String getSituacao(){

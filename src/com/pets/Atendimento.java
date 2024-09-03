@@ -20,6 +20,7 @@ public class Atendimento extends Consulta{
     public Atendimento(Agendamento agendamento){
         super(agendamento.getData(), agendamento.getCliente(), agendamento.getAnimal(), agendamento.getClinica(), agendamento.getServicos());
         this.situacaoAtendimento = EmAndamento.getInstance();
+        verificarSituacao();
     }
 
     public void verificarSituacao() {

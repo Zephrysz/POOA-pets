@@ -27,7 +27,7 @@ public class Main {
         UsuarioFactory usuarioFactory = new UsuarioFactory();
         EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
         
-        System.out.println("Populando o sistema com exemplos");
+        System.out.println("Populando o sistema com exemplos...");
         // Criando clientes e seus animais
         Cliente cliente1 = usuarioFactory.criarCliente("João", "001", "joao@mail.com", "111111", "Rua A", "(15)1111-1111");
         Animal animal1 = new Animal("Doguinho", "Cachorro", "Labrador");
@@ -174,7 +174,6 @@ public class Main {
                         System.out.println("7. Realizar uma compra");
                         System.out.println("8. Listar Animais");
                         System.out.println("9. Deslogar do cliente");
-                        System.out.println("10. Passar x dias");
                         System.out.print("Escolha uma opção: ");
 
                         opcaoCliente = scanner.nextInt();
@@ -268,13 +267,13 @@ public class Main {
                                 break;
                             case 3:
                                 System.out.println("Passando o dia");
-                                for (Agendamento agendamento : clienteLogadoAtualmente.getAgendamentos()){
-                                    agendamento.setData(agendamento.getData() - 1);
-                                    agendamento.verificarSituacao();
-                                }
                                 for (Atendimento atendimento : clienteLogadoAtualmente.getAtendimentos()){
                                     atendimento.setData(atendimento.getData() - 1);
                                     atendimento.verificarSituacao();
+                                }
+                                for (Agendamento agendamento : clienteLogadoAtualmente.getAgendamentos()){
+                                    agendamento.setData(agendamento.getData() - 1);
+                                    agendamento.verificarSituacao();
                                 }
                                 break;
                             case 4:
@@ -362,18 +361,6 @@ public class Main {
                             case 9:
                                 System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
                                 break;
-                            case 10:
-                                LocalDate date = LocalDate.now();
-                                int today = date.getDayOfMonth();
-                                System.out.print("Digite quantos dias voce quer avancar: (hoje eh dia: " + today + "): ");
-                                int diasAvancar = scanner.nextInt();
-                                today += diasAvancar;
-                                clienteLogadoAtualmente.getAgendamentoPorIndex(0).getObjetoSituacaoAgendamento().verificarMudancaSituacao(clienteLogadoAtualmente.getAgendamentoPorIndex(0), today);
-                                // for(int i = 0; i < clienteLogadoAtualmente.qtdAgendamentos(); i++) {
-                                //     Agendamento agendamentosNotificar = clienteLogadoAtualmente.getAgendamentoPorIndex(i);
-                                //     agendamentosNotificar.getSituacaoAgendamento().verificarMudancaSituacao(agendamentosNotificar, today);
-                                // }
-      
 
                             default:
                                 System.out.println("Opção inválida! Tente novamente.");

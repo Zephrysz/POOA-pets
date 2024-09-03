@@ -18,7 +18,7 @@ public class EmAndamento implements SituacaoAtendimento {
             atendimento.setSituacao(Concluido.getInstance());
         }
         else {
-            System.out.println("Atendimento em andamento");
+            System.out.println("Atendimento em andamento...");
         }
     }
     public String getSituacao(){

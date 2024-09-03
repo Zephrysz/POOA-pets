@@ -23,4 +23,10 @@ public class Animal {
     public String getRaca(){
         return this.raca;
     }
+
+    public void printar() {
+        System.out.println("Nome: " + this.getNome());
+        System.out.println("Especie: " + this.getEspecie());
+        System.out.println("Raca: " + this.getRaca());
+    }
 }

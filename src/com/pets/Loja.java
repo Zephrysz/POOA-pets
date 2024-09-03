@@ -31,7 +31,7 @@ public class Loja extends Estabelecimento{
         throw new IllegalArgumentException("Produto não encontrado na loja.");
     }
 
-    public List<Produto> getEstoque() {
+    public List<Produto> getProdutos() {
         return this.produtos;
     }
 }

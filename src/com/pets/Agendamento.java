@@ -35,6 +35,7 @@ public class Agendamento extends Consulta{
 
     public void criarAtendimento() {
         atendimento = new Atendimento(this);
+        this.getCliente().adicionarAtendimento(atendimento);
     }
 
     public String getSituacaoAgendamento() {
@@ -46,7 +47,7 @@ public class Agendamento extends Consulta{
     }
 
     public void printar() {
-        System.out.println("Informacoes da Consulta: ");
+        System.out.println("Informacoes do Agendamento: ");
         System.out.println("Data eh: " + this.getData());
         System.out.println("Cliente eh: " + this.getCliente().getNome());
         System.out.println("Animal eh: " + this.getAnimal().getNome());

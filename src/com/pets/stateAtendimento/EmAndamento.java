@@ -21,4 +21,7 @@ public class EmAndamento implements SituacaoAtendimento {
             System.out.println("Atendimento em andamento");
         }
     }
+    public String getSituacao(){
+        return "Em andamento";
+    }
 }

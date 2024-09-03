@@ -42,6 +42,10 @@ public class Agendamento extends Consulta{
         return this.situacaoAgendamento.getSituacao();
     }
 
+    public SituacaoAgendamento getObjetoSituacaoAgendamento() {
+        return this.situacaoAgendamento;
+    }
+
     public void printar() {
         System.out.println("Informacoes do Agendamento: ");
         System.out.println("Data eh: " + this.getData());

@@ -37,6 +37,10 @@ public class Agendamento extends Consulta{
         atendimento = new Atendimento(this);
     }
 
+    public String getSituacaoAgendamento() {
+        return this.situacaoAgendamento.getSituacao();
+    }
+
     public void printar() {
         System.out.println("Informacoes da Consulta: ");
         System.out.println("Data eh: " + this.getData());

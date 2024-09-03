@@ -139,9 +139,8 @@ public class Main {
                         System.out.println("3. Cancelar Agendamento");
                         System.out.println("4. Listar Agendamentos");
                         System.out.println("5. Realizar uma compra");
-                        System.out.println("6. Deslogar do cliente\n");
-                        System.out.println("7. Listar Animais");
-                        System.out.println("8. Sair");
+                        System.out.println("6. Listar Animais");
+                        System.out.println("7. Deslogar do cliente");
 
                         opcaoCliente = scanner.nextInt();
                         scanner.nextLine();
@@ -245,25 +244,23 @@ public class Main {
                                 // Montando o carrinho selecionando os produtos
                                 // Executando a compra (so dar um print)
                                 break;
-                           case 6:
-                                System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
-                                break;
-      
-                            case 7: 
+                            case 6: 
                                 System.out.println("Seus pets: ");
                                 for (Animal pet : clienteLogadoAtualmente.getPets()) {
                                     pet.printar();
                                     System.out.println("\n");
                                 }
                                 break;
-                            case 8: 
-                                System.out.println("saindo");
+                           case 7:
+                                System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
                                 break;
+      
+
                             default:
                                 System.out.println("Opção inválida! Tente novamente.");
                         }
 
-                    } while (opcaoCliente != 8);
+                    } while (opcaoCliente != 7);
 
                     break;
                 case 4:

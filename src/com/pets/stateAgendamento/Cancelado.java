@@ -14,4 +14,8 @@ public class Cancelado implements SituacaoAgendamento {
     public void verificarMudancaSituacao(Agendamento agendamento, int dataAtual) {
         System.out.println("A situacao eh cancelado");
     }
+
+    public String getSituacao(){
+        return "Cancelado";
+    }
 }

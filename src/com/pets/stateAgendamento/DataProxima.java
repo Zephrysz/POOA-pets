@@ -26,4 +26,8 @@ public class DataProxima implements SituacaoAgendamento {
             System.out.println("A situacao continua Perto, pois ainda faltam: " + diasRestantes + " dia(s)");
         }
     }
+
+    public String getSituacao(){
+        return "Data Proxima";
+    }
 }

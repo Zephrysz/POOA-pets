@@ -21,4 +21,8 @@ public class DataLonge implements SituacaoAgendamento {
             System.out.println("A situacao continua Longe, pois ainda faltam: " + diasRestantes + " dia(s)");
         }
     }
+
+    public String getSituacao(){
+        return "Data Longe";
+    }
 }

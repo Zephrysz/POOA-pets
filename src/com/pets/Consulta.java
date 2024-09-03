@@ -9,7 +9,6 @@ import com.pets.stateAtendimento.*;
 
 public abstract class Consulta extends AbstractSubject{
     private int data; // data da consulta
-    private SituacaoAgendamento situacaoAgendamento;
     private Cliente cliente;
     private Animal animal;
     private Clinica clinica;
@@ -52,9 +51,6 @@ public abstract class Consulta extends AbstractSubject{
         return this.clinica;
     }
 
-    public SituacaoAgendamento getSituacaoAgendamento() {
-        return this.situacaoAgendamento;
-    }
 
     public void printarConsulta() {
         System.out.println("Consulta marcada para o dia: " + data);

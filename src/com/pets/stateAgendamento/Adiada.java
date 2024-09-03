@@ -14,4 +14,8 @@ public class Adiada implements SituacaoAgendamento {
     public void verificarMudancaSituacao(Agendamento agendamento, int dataAtual) {
         System.out.println("A situacao eh adiada");
     }
+
+    public String getSituacao(){
+        return "Adiada";
+    }
 }

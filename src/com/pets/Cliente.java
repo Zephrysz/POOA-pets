@@ -36,8 +36,8 @@ class Cliente extends Usuario implements AbstractObserver{
         compra.adicionarProduto(produto, quantidade, loja);
     }
 
-    public void criarAgendamento(int data, Animal animal, Clinica clinica, SituacaoAgendamento situacao, List<Servico> servicos) {
-        Agendamento agendamento = new Agendamento(data, this, animal, clinica, situacao, servicos);
+    public void criarAgendamento(int data, Animal animal, Clinica clinica, List<Servico> servicos) {
+        Agendamento agendamento = new Agendamento(data, this, animal, clinica, servicos);
         agendamentos.add(agendamento);
     }
     

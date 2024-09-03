@@ -2,9 +2,11 @@ package com.pets;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 import com.pets.stateAtendimento.*;
 import com.pets.servicos.*;
+
 
 public class Atendimento extends Consulta{
 
@@ -21,7 +23,9 @@ public class Atendimento extends Consulta{
     }
 
     public void verificarSituacao(int dataAtual) {
-        this.situacaoAtendimento.verificarMudancaSituacao(this, dataAtual);
+        LocalDate date = LocalDate.now();
+        int today = date.getDayOfMonth();
+        this.situacaoAtendimento.verificarMudancaSituacao(this, today);
     }
 
     public void mudarEstado(SituacaoAtendimento novaSituacao) {

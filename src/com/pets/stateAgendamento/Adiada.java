@@ -2,7 +2,7 @@ package com.pets.stateAgendamento;
 
 import com.pets.*;
 
-public class Adiada implements Situacao {
+public class Adiada implements SituacaoAgendamento {
     private static Adiada instance = new Adiada();
 
     private Adiada() {}

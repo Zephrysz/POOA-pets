@@ -4,6 +4,7 @@ import java.nio.channels.Pipe.SourceChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 import com.pets.stateAtendimento.*;
 import com.pets.stateAgendamento.*;
@@ -25,6 +26,7 @@ public class Main {
         EstabelecimentoFactory estabelecimentoFactory = new EstabelecimentoFactory();
         
         System.out.println("Populando o sistema com exemplos");
+        // Criando clientes e seus animais
         Cliente cliente1 = usuarioFactory.criarCliente("João", "001", "joao@mail.com", "111111", "Rua A", "(15)1111-1111");
         Animal animal1 = new Animal("Doguinho", "Cachorro", "Labrador");
         cliente1.adicionarPet(animal1);
@@ -40,7 +42,7 @@ public class Main {
         cliente3.adicionarPet(animal3);
         clientesExistentes.add(cliente3);
         
-
+        // Criando Prestadores e seus estabelecimentos
         PrestadorDeServicos prestador1 = usuarioFactory.criarPrestador("Jonas", "004", "jonas@mail.com", "cpf4", "endereco4", "contato4");
         Clinica clinica1 = estabelecimentoFactory.criarClinica("Clinica Pets Saudaveis", "123321");
         prestador1.addEstabelecimento(clinica1);
@@ -56,10 +58,27 @@ public class Main {
         loja1.adicionarProduto(produto3);
         prestador2.addEstabelecimento(loja1);
         prestadoresExistentes.add(prestador2);
+
+        // Criando Agendamentos
+        List<Servico> servicosExemplos = new ArrayList<>();
+
+        servicosExemplos.add(Banho.getInstance());
+        clientesExistentes.get(0).criarAgendamento(5, animal1, clinica1, servicosExemplos); 
+
+        servicosExemplos.remove(Banho.getInstance());
+        servicosExemplos.add(ConsultaVeterinaria.getInstance());
+        clientesExistentes.get(1).criarAgendamento(15, animal2, clinica1, servicosExemplos);
+
+        servicosExemplos.add(Tosa.getInstance());
+        servicosExemplos.add(Banho.getInstance());
+        clientesExistentes.get(2).criarAgendamento(30, animal3, clinica1, servicosExemplos);
+
+
+
+
         do {
             // Exibe o menu de opções
             System.out.println("\nMenu de Opções:");
-            System.out.println("0. Popular com exemplos");
             System.out.println("1. Cadastrar Cliente");
             System.out.println("2. Cadastrar Prestador de Servico");
             System.out.println("3. Logar como Cliente");
@@ -67,19 +86,11 @@ public class Main {
             System.out.println("5. Sair\n");
             System.out.print("Escolha uma opção: ");
 
-            // Lê a opção escolhida pelo usuário
             opcaoInicial = scanner.nextInt();
             scanner.nextLine();
+            System.out.println("");
 
-
-
-            // Executa a ação correspondente à opção escolhida
             switch (opcaoInicial) {
-                case 0:
-
-                    System.out.println("Sistema populado com exemplos com sucesso!");
-                    break;
-
                 case 1:
                     System.out.println("Cadastrando um Cliente:");
                     System.out.print("Digite seu nome: ");
@@ -102,15 +113,30 @@ public class Main {
 
                     Cliente clienteCriado = usuarioFactory.criarCliente(nome, codigo, email, cpf, endereco, contato);
                     clientesExistentes.add(clienteCriado);
-
                     break;
 
                 case 2:
                     System.out.println("Cadastrando um Prestador de Servico");
-                    // Entrada dos dados necessarios para cadastrar prestador
-                    // Criacao do prestador
-                    PrestadorDeServicos prestador = usuarioFactory.criarPrestador("Pedro", "002", "pedro@example.com", "cpf2", "endereco2", "contato2");
-                    // Adicionar o prestador no vetor de prestadoresExistentes
+                    System.out.print("Digite seu nome: ");
+                    String nomePrestador = scanner.nextLine();
+
+                    System.out.print("Digite seu codigo: ");
+                    String codigoPrestador = scanner.nextLine();
+
+                    System.out.print("Digite seu email: ");
+                    String emailPrestador = scanner.nextLine();
+
+                    System.out.print("Digite seu CPF: ");
+                    String cpfPrestador = scanner.nextLine();
+
+                    System.out.print("Digite seu endereço: ");
+                    String enderecoPrestador = scanner.nextLine();
+
+                    System.out.print("Digite seu contato: ");
+                    String contatoPrestador = scanner.nextLine();
+
+                    PrestadorDeServicos prestadorCriado = usuarioFactory.criarPrestador(nomePrestador, codigoPrestador, emailPrestador, cpfPrestador, enderecoPrestador, contatoPrestador);
+                    prestadoresExistentes.add(prestadorCriado);
                     break;
 
                 case 3:
@@ -123,7 +149,7 @@ public class Main {
                         System.out.println(i + ". " + clientesExistentes.get(i).getNome());
                     }
 
-                    System.out.print("Digite o numero do Cliente com o nome que voce quer logar: ");
+                    System.out.print("Digite o numero do Cliente que voce quer logar: ");
                     int clienteLogar = scanner.nextInt();
                     scanner.nextLine();
 
@@ -134,16 +160,20 @@ public class Main {
                     int opcaoCliente;
                     do {
                         // Opcoes do Cliente
-                        System.out.println("\n1. Cadastrar Animal");
+                        System.out.println("\nMenu do cliente: " + clienteLogadoAtualmente.getNome());
+                        System.out.println("1. Cadastrar Animal");
                         System.out.println("2. Criar Agendamento");
                         System.out.println("3. Cancelar Agendamento");
                         System.out.println("4. Listar Agendamentos");
                         System.out.println("5. Realizar uma compra");
                         System.out.println("6. Listar Animais");
                         System.out.println("7. Deslogar do cliente");
+                        System.out.println("8. Avancar o tempo\n");
+                        System.out.print("Escolha uma opção: ");
 
                         opcaoCliente = scanner.nextInt();
                         scanner.nextLine();
+                        System.out.println("");
 
                         switch (opcaoCliente) {
                             case 1:
@@ -251,9 +281,20 @@ public class Main {
                                     System.out.println("\n");
                                 }
                                 break;
-                           case 7:
+                            case 7:
                                 System.out.println("Saindo da conta do cliente: " + clienteLogadoAtualmente.getNome());
                                 break;
+                            case 8:
+                                LocalDate date = LocalDate.now();
+                                int today = date.getDayOfMonth();
+                                System.out.print("Digite quantos dias voce quer avancar: (hoje eh dia: " + today + "): ");
+                                int diasAvancar = scanner.nextInt();
+                                today += diasAvancar;
+                                clienteLogadoAtualmente.getAgendamentoPorIndex(0).getObjetoSituacaoAgendamento().verificarMudancaSituacao(clienteLogadoAtualmente.getAgendamentoPorIndex(0), today);
+                                // for(int i = 0; i < clienteLogadoAtualmente.qtdAgendamentos(); i++) {
+                                //     Agendamento agendamentosNotificar = clienteLogadoAtualmente.getAgendamentoPorIndex(i);
+                                //     agendamentosNotificar.getSituacaoAgendamento().verificarMudancaSituacao(agendamentosNotificar, today);
+                                // }
       
 
                             default:
@@ -269,7 +310,7 @@ public class Main {
                         System.out.println(i + ". " + prestadoresExistentes.get(i).getNome());
                     }
 
-                    System.out.print("Digite o numero do prestado com o nome que voce quer logar: ");
+                    System.out.print("Digite o numero do prestador que voce quer logar: ");
                     int prestadorLogar = scanner.nextInt();
                     System.out.println("");
 
@@ -281,6 +322,7 @@ public class Main {
                     do {
                         
                         // Opcoes do Prestador de Servico
+                        System.out.println("\nMenu do Prestador: " + prestadorLogadoAtualmente.getNome());
                         System.out.println("1. Cadastrar uma Loja");
                         System.out.println("2. Cadastrar uma Clinica");
                         System.out.println("3. Adicionar Produtos estoque");
@@ -292,7 +334,7 @@ public class Main {
                         
                         opcaoPrestador = scanner.nextInt();
                         scanner.nextLine();
-
+                        System.out.println("");
 
                         switch (opcaoPrestador) {
                             case 1:

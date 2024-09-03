@@ -75,4 +75,8 @@ class Cliente extends Usuario implements AbstractObserver{
             agendamentos.get(i).printar();
         }
     }
+
+    public int qtdAgendamentos() {
+        return agendamentos.size();
+    }
 }
